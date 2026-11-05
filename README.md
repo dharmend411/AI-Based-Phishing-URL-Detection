@@ -47,7 +47,21 @@ These results are measured on a held-out test dataset and do not guarantee real-
 - Dashboard with pie chart
 - CSV report export
 
-## 7. Project Structure
+## 7. Project Screenshots
+
+### Homepage
+![Homepage](screenshots/homepage.png)
+
+### Phishing Detection Result
+![Phishing Detection](screenshots/phishing-result.png)
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Scan History
+![Scan History](screenshots/history.png)
+
+## 8. Project Structure
 - app.py
 - feature_extraction.py
 - train_url_model.py
@@ -57,7 +71,7 @@ These results are measured on a held-out test dataset and do not guarantee real-
 - static/
 - requirements.txt
 
-## 8. How to Run
+## 9. How to Run
 1. Clone the repository.
 2. Create a Python virtual environment.
 3. Install dependencies:
@@ -66,9 +80,9 @@ These results are measured on a held-out test dataset and do not guarantee real-
    python app.py
 5. Open http://127.0.0.1:5000 in your browser.
 
-## 9. Disclaimer
+## 10. Disclaimer
 This application provides machine learning-based URL predictions for educational purposes. It does not guarantee that a website is safe or malicious.
-## 10. Dataset Attribution
+## 11. Dataset Attribution
 
 Dataset: URL-Phish: A Feature-Engineered Dataset for Phishing Detection
 
