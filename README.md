@@ -61,7 +61,20 @@ These results are measured on a held-out test dataset and do not guarantee real-
 ### Scan History
 ![Scan History](screenshots/history.png)
 
-## 8. Project Structure
+## 8. System Workflow
+
+```mermaid
+flowchart TD
+    A[User Enters Website URL] --> B[URL Validation]
+    B --> C[Feature Extraction]
+    C --> D[Trained Random Forest Model]
+    D --> E[Phishing or Legitimate Prediction]
+    E --> F[Display Prediction and Confidence]
+    F --> G[Save Scan History]
+    G --> H[Dashboard and Reports]
+```
+
+## 9. Project Structure
 - app.py
 - feature_extraction.py
 - train_url_model.py
@@ -71,7 +84,7 @@ These results are measured on a held-out test dataset and do not guarantee real-
 - static/
 - requirements.txt
 
-## 9. How to Run
+## 10. How to Run
 1. Clone the repository.
 2. Create a Python virtual environment.
 3. Install dependencies:
@@ -80,9 +93,9 @@ These results are measured on a held-out test dataset and do not guarantee real-
    python app.py
 5. Open http://127.0.0.1:5000 in your browser.
 
-## 10. Disclaimer
+## 11. Disclaimer
 This application provides machine learning-based URL predictions for educational purposes. It does not guarantee that a website is safe or malicious.
-## 11. Dataset Attribution
+## 12. Dataset Attribution
 
 Dataset: URL-Phish: A Feature-Engineered Dataset for Phishing Detection
 
