@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scan History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Prediction History</h1>
+
+        <p>Previously scanned URLs and their results.</p>
+
+        <!-- Search Box -->
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search URL..."
+        >
+
+        <!-- Filter -->
+        <select id="predictionFilter"
+                style="width:100%; padding:12px; margin-bottom:20px; border-radius:7px;">
+
+            <option value="all">All Predictions</option>
+            <option value="legitimate">Legitimate</option>
+            <option value="phishing">Phishing</option>
+
+        </select>
+
+        {% if records %}
+
+        <div style="overflow-x:auto;">
+
+            <table border="1" cellpadding="10"
+                   cellspacing="0" width="100%" id="historyTable">
+
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>URL</th>
+                        <th>Prediction</th>
+                        <th>Confidence</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for record in records %}
+
+                    <tr>
+                        <td>{{ record["Date"] }}</td>
+
+                        <td class="url-cell">
+                            {{ record["URL"] }}
+                        </td>
+
+                        <td class="prediction-cell">
+                            {{ record["Prediction"] }}
+                        </td>
+
+                        <td>{{ record["Confidence"] }}%</td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            <p id="noResults" style="display:none; margin-top:15px;">
+                No matching records found.
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <p>No scan history available yet.</p>
+
+        {% endif %}
+        <a href="{{ url_for('export_history') }}" class="clear-button">
+    Download CSV Report
+</a>
+
+        <a href="{{ url_for('home') }}" class="clear-button">
+            Back to Home
+        </a>
+
+    </div>
+
+    <!-- Search and Filter JavaScript -->
+    <script>
+
+        const searchInput = document.getElementById("searchInput");
+        const predictionFilter = document.getElementById("predictionFilter");
+        const table = document.getElementById("historyTable");
+
+        function filterHistory() {
+
+            const searchValue = searchInput.value.toLowerCase();
+            const filterValue = predictionFilter.value;
+
+            const rows = table
+                ? table.querySelectorAll("tbody tr")
+                : [];
+
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+
+                const url = row.cells[1].textContent.toLowerCase();
+               const prediction = row.cells[2].textContent.trim().toLowerCase();
+
+                const matchesSearch = url.includes(searchValue);
+
+                const matchesFilter =
+                    filterValue === "all" ||
+                    prediction === filterValue;
+
+                if (matchesSearch && matchesFilter) {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+
+            });
+
+            const noResults = document.getElementById("noResults");
+
+            if (noResults) {
+                noResults.style.display =
+                    visibleCount === 0 ? "block" : "none";
+            }
+        }
+
+        searchInput.addEventListener("input", filterHistory);
+
+        predictionFilter.addEventListener("change", filterHistory);
+
+    </script>
+
+</body>
+</html>

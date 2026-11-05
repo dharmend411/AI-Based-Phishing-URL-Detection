@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Phishing URL Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container home-container">
+
+        <h1>AI-Based Phishing URL Detection</h1>
+        <p>Check whether a website URL may be phishing or legitimate.</p>
+
+        <form method="POST">
+            <input
+                type="text"
+                name="url"
+                placeholder="Enter website URL..."
+                value="{{ submitted_url }}"
+                required
+            >
+            <button type="submit">Check URL</button>
+        </form>
+
+        {% if result %}
+        <div class="result {% if 'Phishing' in result %}phishing{% else %}legitimate{% endif %}">
+            <h3>Scan Result</h3>
+            <p>{{ result }}</p>
+        </div>
+        {% endif %}
+
+        <a href="{{ url_for('home') }}" class="clear-button">Clear</a>
+
+        <a href="{{ url_for('history') }}" class="clear-button">
+            View Scan History
+        </a>
+
+        <a href="{{ url_for('dashboard') }}" class="clear-button">
+            View Dashboard
+        </a>
+
+        <p class="note">
+            This tool provides an ML-based prediction, not a guarantee of website safety.
+        </p>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+.venv/
+
+# Environment variables
+.env
+
+# Flask
+instance/
+
+# Personal scan history
+history.csv
+
+# IDE files
+.vscode/
+dataset/PhishingData.csv/
+dataset/PhishingData.csv.zip
+model/phishing_model.pkl
+dataset/Dataset.csv

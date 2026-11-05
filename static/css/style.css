@@ -1,0 +1,255 @@
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #101827, #1e3a5f);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+}
+
+/* Main Container */
+.container {
+    background: white;
+    width: 100%;
+    max-width: 1100px;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Headings */
+h1 {
+    color: #172554;
+    margin-bottom: 15px;
+    font-size: 30px;
+}
+
+h2 {
+    color: #172554;
+}
+
+/* Paragraph */
+.container > p {
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* Input */
+input,
+select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #bbb;
+    border-radius: 7px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 14px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* Result */
+.result {
+    margin-top: 25px;
+    padding: 20px;
+    background: #eff6ff;
+    border-radius: 8px;
+    color: #172554;
+    overflow-wrap: anywhere;
+}
+
+.result p {
+    margin-top: 10px;
+}
+
+.result.phishing {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
+
+.result.legitimate {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+/* Navigation Links */
+.clear-button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    background: #64748b;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.clear-button:hover {
+    background: #475569;
+}
+
+/* Dashboard Cards */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.dashboard-card {
+    padding: 28px 15px;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+}
+
+.dashboard-card h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.dashboard-card p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.dashboard-card.total {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.dashboard-card.safe {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.dashboard-card.danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Chart and Dashboard Sections */
+.chart-container {
+    width: 100%;
+    max-width: 850px;
+    margin: 35px auto;
+    padding: 30px;
+    background: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.chart-container h2 {
+    color: #172554;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+    text-align: left;
+    background: white;
+}
+
+th {
+    background: #1e3a5f;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    overflow-wrap: anywhere;
+}
+
+tr:hover {
+    background: #f1f5f9;
+}
+
+/* Note */
+.note {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+}
+
+/* Tablet Responsive */
+@media (max-width: 900px) {
+    .container {
+        padding: 25px;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        padding: 20px 15px;
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-card h2 {
+        font-size: 27px;
+    }
+
+    .chart-container {
+        padding: 18px 12px;
+    }
+
+    th, td {
+        padding: 8px;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Security Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Security Dashboard</h1>
+
+        <p>Overview of URL detection and scanning activity.</p>
+
+        <!-- Dashboard Cards -->
+        <div class="dashboard-cards">
+
+            <div class="dashboard-card total">
+                <h2>{{ total_scans }}</h2>
+                <p>Total Scans</p>
+            </div>
+
+            <div class="dashboard-card safe">
+                <h2>{{ legitimate_count }}</h2>
+                <p>Legitimate URLs</p>
+            </div>
+
+            <div class="dashboard-card danger">
+                <h2>{{ phishing_count }}</h2>
+                <p>Potential Phishing URLs</p>
+            </div>
+
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="chart-container">
+
+            <h2>URL Detection Analysis</h2>
+
+            <canvas
+                id="detectionChart"
+                data-legitimate="{{ legitimate_count }}"
+                data-phishing="{{ phishing_count }}">
+            </canvas>
+
+        </div>
+        
+<!-- Percentage Analysis -->
+<div class="dashboard-cards">
+
+    <div class="dashboard-card safe">
+        <h2>{{ legitimate_percentage }}%</h2>
+        <p>Legitimate Percentage</p>
+    </div>
+
+    <div class="dashboard-card danger">
+        <h2>{{ phishing_percentage }}%</h2>
+        <p>Phishing Percentage</p>
+    </div>
+
+</div>
+<!-- Model Performance Section -->
+<div class="chart-container">
+
+    <h2>AI Model Performance</h2>
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card total">
+            <h2>{{ performance.accuracy }}%</h2>
+            <p>Accuracy</p>
+        </div>
+
+        <div class="dashboard-card safe">
+            <h2>{{ performance.precision }}%</h2>
+            <p>Precision</p>
+        </div>
+
+        <div class="dashboard-card danger">
+            <h2>{{ performance.recall }}%</h2>
+            <p>Recall</p>
+        </div>
+
+        <div class="dashboard-card total">
+            <h2>{{ performance.f1_score }}%</h2>
+            <p>F1-Score</p>
+        </div>
+
+    </div>
+
+    <p class="note">
+        Performance measured on the held-out test dataset.
+    </p>
+
+</div>
+
+
+<!-- Recent Scan Activity -->
+<div class="chart-container">
+
+    <h2>Recent Scan Activity</h2>
+
+    {% if recent_records %}
+
+    <div style="overflow-x: auto;">
+
+        <table border="1" cellpadding="10"
+               cellspacing="0" width="100%">
+
+            <tr>
+                <th>Date</th>
+                <th>URL</th>
+                <th>Prediction</th>
+                <th>Confidence</th>
+            </tr>
+
+            {% for record in recent_records %}
+            <tr>
+                <td>{{ record["Date"] }}</td>
+                <td>{{ record["URL"] }}</td>
+                <td>{{ record["Prediction"] }}</td>
+                <td>{{ record["Confidence"] }}%</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <p>No scan activity available yet.</p>
+
+    {% endif %}
+
+</div>
+
+
+
+        <!-- Navigation Buttons -->
+        <a href="{{ url_for('home') }}" class="clear-button">
+            Back to Home
+        </a>
+
+        <a href="{{ url_for('history') }}" class="clear-button">
+            View Scan History
+        </a>
+
+    </div>
+
+    <!-- Chart JavaScript -->
+    <script>
+        const ctx = document.getElementById('detectionChart');
+
+        const legitimateCount = Number(ctx.dataset.legitimate);
+        const phishingCount = Number(ctx.dataset.phishing);
+
+        new Chart(ctx, {
+
+            type: 'pie',
+
+            data: {
+                labels: [
+                    'Legitimate URLs',
+                    'Potential Phishing URLs'
+                ],
+
+                datasets: [{
+                    data: [
+                        legitimateCount,
+                        phishingCount
+                    ],
+
+                    backgroundColor: [
+                        '#22c55e',
+                        '#ef4444'
+                    ],
+
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+
+            options: {
+                responsive: true,
+
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+
+                    title: {
+                        display: true,
+                        text: 'URL Detection Results'
+                    }
+                }
+            }
+
+        });
+    </script>
+
+</body>
+</html>
