@@ -26,6 +26,7 @@ The AI-Based Phishing URL Detection System is a machine learning web application
 The project uses a URL-based dataset containing 116,600 records:
 - 100,000 Legitimate URLs
 - 16,600 Phishing URLs
+**Note:** The dataset is not included in this repository due to security and file-sharing considerations. Download the original dataset from [Mendeley Data](https://data.mendeley.com/datasets/65z9twcx3r/2) before running the model training script.
 
 ## 5. Machine Learning Model
 Algorithm: Random Forest Classifier
